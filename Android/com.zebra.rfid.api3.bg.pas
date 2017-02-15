@@ -21,7 +21,7 @@ uses
   com.zebra.rfid.api3.AccessFilter,
   com.zebra.rfid.api3.cl,
   com.zebra.rfid.api3.ae,
-  com.zebra.rfid.api3.TagAccess_Sequence,
+  com.zebra.rfid.api3.Impinj,
   com.zebra.rfid.api3.StartTrigger,
   com.zebra.rfid.api3.StopTrigger,
   com.zebra.rfid.api3.DYNAMIC_POWER_OPTIMIZATION,

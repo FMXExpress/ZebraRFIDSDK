@@ -8,12 +8,15 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  com.zebra.rfid.api3.Antennas_AntennaProperties,
-  com.zebra.rfid.api3.Antennas_AntennaRfConfig_AntennaStopTrigger,
-  com.zebra.rfid.api3.Antennas_SingulationControl_SingulationAction,
-  com.zebra.rfid.api3.SESSION;
+  com.zebra.rfid.api3.SESSION,
+  com.zebra.rfid.api3.ANTENNA_STOP_TRIGGER_TYPE,
+  com.zebra.rfid.api3.INVENTORY_STATE,
+  com.zebra.rfid.api3.SL_FLAG;
 
 type
+  JAntennas_SingulationControl_SingulationAction = interface; // merged
+  JAntennas_AntennaRfConfig_AntennaStopTrigger = interface; // merged
+  JAntennas_AntennaProperties = interface; // merged
   JAntennas_RFMode = interface; // merged
   JAntennas_SingulationControl = interface; // merged
   JAntennas_AntennaRfConfig = interface; // merged
@@ -205,6 +208,72 @@ type
   end;
 
   TJAntennas_RFMode = class(TJavaGenericImport<JAntennas_RFModeClass, JAntennas_RFMode>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Antennas_AntennaProperties.pas
+  JAntennas_AntennaPropertiesClass = interface(JObjectClass)
+    ['{37D4A8CC-55CB-43D0-8BF9-6C6F89665D6B}']
+    function getIndex : SmallInt; cdecl;                                        // ()S A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Antennas_AntennaProperties')]
+  JAntennas_AntennaProperties = interface(JObject)
+    ['{499E8BA5-60D5-4534-9B14-EF4BB6C4B4BA}']
+    function getIndex : SmallInt; cdecl;                                        // ()S A: $1
+  end;
+
+  TJAntennas_AntennaProperties = class(TJavaGenericImport<JAntennas_AntennaPropertiesClass, JAntennas_AntennaProperties>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Antennas_AntennaRfConfig_AntennaStopTrigger.pas
+  JAntennas_AntennaRfConfig_AntennaStopTriggerClass = interface(JObjectClass)
+    ['{1D713605-3A2A-49F0-8527-64195CF0B960}']
+    function getAntennaStopConditionValue : Integer; cdecl;                     // ()I A: $1
+    function getStopTriggerType : JANTENNA_STOP_TRIGGER_TYPE; cdecl;            // ()Lcom/zebra/rfid/api3/ANTENNA_STOP_TRIGGER_TYPE; A: $1
+    function init(JAntennas_AntennaRfConfigparam0 : JAntennas_AntennaRfConfig) : JAntennas_AntennaRfConfig_AntennaStopTrigger; cdecl;// (Lcom/zebra/rfid/api3/Antennas$AntennaRfConfig;)V A: $1
+    procedure setAntennaStopConditionValue(m_AntennaStopConditionValue : Integer) ; cdecl;// (I)V A: $1
+    procedure setStopTriggerType(m_StopTriggerType : JANTENNA_STOP_TRIGGER_TYPE) ; cdecl;// (Lcom/zebra/rfid/api3/ANTENNA_STOP_TRIGGER_TYPE;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Antennas_AntennaRfConfig_AntennaStopTrigger')]
+  JAntennas_AntennaRfConfig_AntennaStopTrigger = interface(JObject)
+    ['{ACE54CF6-3001-4848-AFAB-4468C87CCFF7}']
+    function getAntennaStopConditionValue : Integer; cdecl;                     // ()I A: $1
+    function getStopTriggerType : JANTENNA_STOP_TRIGGER_TYPE; cdecl;            // ()Lcom/zebra/rfid/api3/ANTENNA_STOP_TRIGGER_TYPE; A: $1
+    procedure setAntennaStopConditionValue(m_AntennaStopConditionValue : Integer) ; cdecl;// (I)V A: $1
+    procedure setStopTriggerType(m_StopTriggerType : JANTENNA_STOP_TRIGGER_TYPE) ; cdecl;// (Lcom/zebra/rfid/api3/ANTENNA_STOP_TRIGGER_TYPE;)V A: $1
+  end;
+
+  TJAntennas_AntennaRfConfig_AntennaStopTrigger = class(TJavaGenericImport<JAntennas_AntennaRfConfig_AntennaStopTriggerClass, JAntennas_AntennaRfConfig_AntennaStopTrigger>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Antennas_SingulationControl_SingulationAction.pas
+  JAntennas_SingulationControl_SingulationActionClass = interface(JObjectClass)
+    ['{DC28A421-DFCA-4ED5-B34E-6CEE794A306E}']
+    function getInventoryState : JINVENTORY_STATE; cdecl;                       // ()Lcom/zebra/rfid/api3/INVENTORY_STATE; A: $1
+    function getSLFlag : JSL_FLAG; cdecl;                                       // ()Lcom/zebra/rfid/api3/SL_FLAG; A: $1
+    function init(JAntennas_SingulationControlparam0 : JAntennas_SingulationControl) : JAntennas_SingulationControl_SingulationAction; cdecl;// (Lcom/zebra/rfid/api3/Antennas$SingulationControl;)V A: $1
+    function isPerformStateAwareSingulationActionSet : boolean; cdecl;          // ()Z A: $1
+    procedure setInventoryState(inventoryState : JINVENTORY_STATE) ; cdecl;     // (Lcom/zebra/rfid/api3/INVENTORY_STATE;)V A: $1
+    procedure setPerformStateAwareSingulationAction(m_PerformStateAwareSingulationAction : boolean) ; cdecl;// (Z)V A: $1
+    procedure setSLFlag(slFlag : JSL_FLAG) ; cdecl;                             // (Lcom/zebra/rfid/api3/SL_FLAG;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Antennas_SingulationControl_SingulationAction')]
+  JAntennas_SingulationControl_SingulationAction = interface(JObject)
+    ['{AE96E427-20BB-43D0-8257-CCDC5C6F7E24}']
+    function getInventoryState : JINVENTORY_STATE; cdecl;                       // ()Lcom/zebra/rfid/api3/INVENTORY_STATE; A: $1
+    function getSLFlag : JSL_FLAG; cdecl;                                       // ()Lcom/zebra/rfid/api3/SL_FLAG; A: $1
+    function isPerformStateAwareSingulationActionSet : boolean; cdecl;          // ()Z A: $1
+    procedure setInventoryState(inventoryState : JINVENTORY_STATE) ; cdecl;     // (Lcom/zebra/rfid/api3/INVENTORY_STATE;)V A: $1
+    procedure setPerformStateAwareSingulationAction(m_PerformStateAwareSingulationAction : boolean) ; cdecl;// (Z)V A: $1
+    procedure setSLFlag(slFlag : JSL_FLAG) ; cdecl;                             // (Lcom/zebra/rfid/api3/SL_FLAG;)V A: $1
+  end;
+
+  TJAntennas_SingulationControl_SingulationAction = class(TJavaGenericImport<JAntennas_SingulationControl_SingulationActionClass, JAntennas_SingulationControl_SingulationAction>)
   end;
 
 

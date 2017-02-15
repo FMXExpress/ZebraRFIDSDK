@@ -8,13 +8,16 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  com.zebra.rfid.api3.PreFilters_StateAwareActionParams,
-  com.zebra.rfid.api3.PreFilters_StateUnawareAction,
   com.zebra.rfid.api3.MEMORY_BANK,
   com.zebra.rfid.api3.FILTER_ACTION,
-  com.zebra.rfid.api3.TRUNCATE_ACTION;
+  com.zebra.rfid.api3.TRUNCATE_ACTION,
+  com.zebra.rfid.api3.TARGET,
+  com.zebra.rfid.api3.STATE_AWARE_ACTION,
+  com.zebra.rfid.api3.STATE_UNAWARE_ACTION;
 
 type
+  JPreFilters_StateUnawareAction = interface; // merged
+  JPreFilters_StateAwareActionParams = interface; // merged
   JPreFilters_PreFilter = interface; // merged
   JPreFilters = interface;
 
@@ -101,6 +104,46 @@ type
   end;
 
   TJPreFilters_PreFilter = class(TJavaGenericImport<JPreFilters_PreFilterClass, JPreFilters_PreFilter>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.PreFilters_StateAwareActionParams.pas
+  JPreFilters_StateAwareActionParamsClass = interface(JObjectClass)
+    ['{5A4C777D-E255-45AF-AA5D-939D5A4B4B64}']
+    function getStateAwareAction : JSTATE_AWARE_ACTION; cdecl;                  // ()Lcom/zebra/rfid/api3/STATE_AWARE_ACTION; A: $1
+    function getTarget : JTARGET; cdecl;                                        // ()Lcom/zebra/rfid/api3/TARGET; A: $1
+    procedure setStateAwareAction(stateAwareAction : JSTATE_AWARE_ACTION) ; cdecl;// (Lcom/zebra/rfid/api3/STATE_AWARE_ACTION;)V A: $1
+    procedure setTarget(target : JTARGET) ; cdecl;                              // (Lcom/zebra/rfid/api3/TARGET;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/PreFilters_StateAwareActionParams')]
+  JPreFilters_StateAwareActionParams = interface(JObject)
+    ['{0C9C4679-CB37-4E71-BD01-D1C87D18F8C1}']
+    function getStateAwareAction : JSTATE_AWARE_ACTION; cdecl;                  // ()Lcom/zebra/rfid/api3/STATE_AWARE_ACTION; A: $1
+    function getTarget : JTARGET; cdecl;                                        // ()Lcom/zebra/rfid/api3/TARGET; A: $1
+    procedure setStateAwareAction(stateAwareAction : JSTATE_AWARE_ACTION) ; cdecl;// (Lcom/zebra/rfid/api3/STATE_AWARE_ACTION;)V A: $1
+    procedure setTarget(target : JTARGET) ; cdecl;                              // (Lcom/zebra/rfid/api3/TARGET;)V A: $1
+  end;
+
+  TJPreFilters_StateAwareActionParams = class(TJavaGenericImport<JPreFilters_StateAwareActionParamsClass, JPreFilters_StateAwareActionParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.PreFilters_StateUnawareAction.pas
+  JPreFilters_StateUnawareActionClass = interface(JObjectClass)
+    ['{038D7978-D1A8-466E-A940-4789BB544BC2}']
+    function getStateUnawareAction : JSTATE_UNAWARE_ACTION; cdecl;              // ()Lcom/zebra/rfid/api3/STATE_UNAWARE_ACTION; A: $1
+    procedure setStateUnawareAction(stateUnawareAction : JSTATE_UNAWARE_ACTION) ; cdecl;// (Lcom/zebra/rfid/api3/STATE_UNAWARE_ACTION;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/PreFilters_StateUnawareAction')]
+  JPreFilters_StateUnawareAction = interface(JObject)
+    ['{300FB6FF-352E-4436-9649-6E3FBBF7ADD7}']
+    function getStateUnawareAction : JSTATE_UNAWARE_ACTION; cdecl;              // ()Lcom/zebra/rfid/api3/STATE_UNAWARE_ACTION; A: $1
+    procedure setStateUnawareAction(stateUnawareAction : JSTATE_UNAWARE_ACTION) ; cdecl;// (Lcom/zebra/rfid/api3/STATE_UNAWARE_ACTION;)V A: $1
+  end;
+
+  TJPreFilters_StateUnawareAction = class(TJavaGenericImport<JPreFilters_StateUnawareActionClass, JPreFilters_StateUnawareAction>)
   end;
 
 

@@ -10,32 +10,41 @@ uses
   Androidapi.JNI.JavaTypes,
   com.zebra.rfid.api3.bw,
   com.zebra.rfid.api3.RfidReadEvents,
-  com.zebra.rfid.api3.RfidStatusEvents,
   com.zebra.rfid.api3.ay,
   java.util.Vector,
   java.util.concurrent.BlockingQueue,
   java.util.Hashtable,
   com.zebra.rfid.api3.RFID_EVENT_TYPE,
   com.zebra.rfid.api3.RfidEventsListener,
-  com.zebra.rfid.api3.Events_GPIEventData,
-  com.zebra.rfid.api3.Events_BufferFullWarningEventData,
-  com.zebra.rfid.api3.Events_AntennaEventData,
-  com.zebra.rfid.api3.Events_InventoryStartEventData,
-  com.zebra.rfid.api3.Events_InventoryStopEventData,
-  com.zebra.rfid.api3.Events_AccessStartEventData,
-  com.zebra.rfid.api3.Events_AccessStopEventData,
-  com.zebra.rfid.api3.Events_DisconnectionEventData,
-  com.zebra.rfid.api3.Events_ReaderExceptionEventData,
-  com.zebra.rfid.api3.Events_NXPEASAlarmEventData,
-  com.zebra.rfid.api3.Events_HandheldTriggerEventData,
-  com.zebra.rfid.api3.Events_TemperatureAlarmData,
-  com.zebra.rfid.api3.Events_OperationEndSummaryData,
-  com.zebra.rfid.api3.Events_BatchModeEventData,
-  com.zebra.rfid.api3.Events_PowerData,
-  com.zebra.rfid.api3.Events_BatteryData,
-  com.zebra.rfid.api3.STATUS_EVENT_TYPE;
+  com.zebra.rfid.api3.STATUS_EVENT_TYPE,
+  com.zebra.rfid.api3.ANTENNA_EVENT_TYPE,
+  com.zebra.rfid.api3.t,
+  com.zebra.rfid.api3.DISCONNECTION_EVENT_TYPE,
+  com.zebra.rfid.api3.bj,
+  com.zebra.rfid.api3.READER_EXCEPTION_EVENT_TYPE,
+  com.zebra.rfid.api3.HANDHELD_TRIGGER_EVENT_TYPE,
+  com.zebra.rfid.api3.TEMPERATURE_SOURCE,
+  com.zebra.rfid.api3.ALARM_LEVEL,
+  com.zebra.rfid.api3.BATCH_MODE;
 
 type
+  JEvents_BatteryData = interface; // merged
+  JEvents_PowerData = interface; // merged
+  JEvents_BatchModeEventData = interface; // merged
+  JEvents_OperationEndSummaryData = interface; // merged
+  JEvents_TemperatureAlarmData = interface; // merged
+  JEvents_HandheldTriggerEventData = interface; // merged
+  JEvents_NXPEASAlarmEventData = interface; // merged
+  JEvents_ReaderExceptionEventData = interface; // merged
+  JEvents_DisconnectionEventData = interface; // merged
+  JEvents_AccessStopEventData = interface; // merged
+  JEvents_AccessStartEventData = interface; // merged
+  JEvents_InventoryStopEventData = interface; // merged
+  JEvents_InventoryStartEventData = interface; // merged
+  JEvents_AntennaEventData = interface; // merged
+  JEvents_BufferFullWarningEventData = interface; // merged
+  JEvents_GPIEventData = interface; // merged
+  JRfidStatusEvents = interface; // merged
   JEvents_StatusEventData = interface; // merged
   JEvents_a = interface; // merged
   JEvents_c = interface; // merged
@@ -306,6 +315,309 @@ type
   end;
 
   TJEvents_StatusEventData = class(TJavaGenericImport<JEvents_StatusEventDataClass, JEvents_StatusEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.RfidStatusEvents.pas
+  JRfidStatusEventsClass = interface(JObjectClass)
+    ['{FE2DDEBF-EE36-40D7-AE07-BF84D5341235}']
+    function _GetStatusEventData : JEvents_StatusEventData; cdecl;              //  A: $1
+    function init(source : JObject) : JRfidStatusEvents; cdecl;                 // (Ljava/lang/Object;)V A: $1
+    procedure _SetStatusEventData(Value : JEvents_StatusEventData) ; cdecl;     //  A: $1
+    procedure setStatusEventData(statusEventData : JEvents_StatusEventData) ; cdecl;// (Lcom/zebra/rfid/api3/Events$StatusEventData;)V A: $1
+    property StatusEventData : JEvents_StatusEventData read _GetStatusEventData write _SetStatusEventData;// Lcom/zebra/rfid/api3/Events$StatusEventData; A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/RfidStatusEvents')]
+  JRfidStatusEvents = interface(JObject)
+    ['{DA90ECE7-1190-4892-8E85-CCD2E0DC8A6B}']
+    function _GetStatusEventData : JEvents_StatusEventData; cdecl;              //  A: $1
+    procedure _SetStatusEventData(Value : JEvents_StatusEventData) ; cdecl;     //  A: $1
+    procedure setStatusEventData(statusEventData : JEvents_StatusEventData) ; cdecl;// (Lcom/zebra/rfid/api3/Events$StatusEventData;)V A: $1
+    property StatusEventData : JEvents_StatusEventData read _GetStatusEventData write _SetStatusEventData;// Lcom/zebra/rfid/api3/Events$StatusEventData; A: $1
+  end;
+
+  TJRfidStatusEvents = class(TJavaGenericImport<JRfidStatusEventsClass, JRfidStatusEvents>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_GPIEventData.pas
+  JEvents_GPIEventDataClass = interface(JObjectClass)
+    ['{92D666C7-318D-4D9D-853F-29DA26DDB20B}']
+    function getGPIEventState : boolean; cdecl;                                 // ()Z A: $1
+    function getGPIPort : Integer; cdecl;                                       // ()I A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_GPIEventData')]
+  JEvents_GPIEventData = interface(JObject)
+    ['{6BA564D6-7980-44F0-A2D7-DC5D6DE0EC96}']
+    function getGPIEventState : boolean; cdecl;                                 // ()Z A: $1
+    function getGPIPort : Integer; cdecl;                                       // ()I A: $1
+  end;
+
+  TJEvents_GPIEventData = class(TJavaGenericImport<JEvents_GPIEventDataClass, JEvents_GPIEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_BufferFullWarningEventData.pas
+  JEvents_BufferFullWarningEventDataClass = interface(JObjectClass)
+    ['{BF31890A-5F7E-44FB-81A7-9F0D12DBF818}']
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_BufferFullWarningEventData')]
+  JEvents_BufferFullWarningEventData = interface(JObject)
+    ['{BEAF0838-C7B8-4F60-A65C-EBCE52B3C1C8}']
+  end;
+
+  TJEvents_BufferFullWarningEventData = class(TJavaGenericImport<JEvents_BufferFullWarningEventDataClass, JEvents_BufferFullWarningEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_AntennaEventData.pas
+  JEvents_AntennaEventDataClass = interface(JObjectClass)
+    ['{38C85B42-20EE-41AD-BB8B-00AD6394707C}']
+    function getAntennaEvent : JANTENNA_EVENT_TYPE; cdecl;                      // ()Lcom/zebra/rfid/api3/ANTENNA_EVENT_TYPE; A: $1
+    function getAntennaID : Integer; cdecl;                                     // ()I A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_AntennaEventData')]
+  JEvents_AntennaEventData = interface(JObject)
+    ['{A01811CB-5B41-4EE2-927C-720EF26C35BE}']
+    function getAntennaEvent : JANTENNA_EVENT_TYPE; cdecl;                      // ()Lcom/zebra/rfid/api3/ANTENNA_EVENT_TYPE; A: $1
+    function getAntennaID : Integer; cdecl;                                     // ()I A: $1
+  end;
+
+  TJEvents_AntennaEventData = class(TJavaGenericImport<JEvents_AntennaEventDataClass, JEvents_AntennaEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_InventoryStartEventData.pas
+  JEvents_InventoryStartEventDataClass = interface(JObjectClass)
+    ['{4236F65F-229F-4A80-A071-6BE11011C55E}']
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_InventoryStartEventData')]
+  JEvents_InventoryStartEventData = interface(JObject)
+    ['{E659FC33-6B18-476C-8EA6-FBEFDA28656D}']
+  end;
+
+  TJEvents_InventoryStartEventData = class(TJavaGenericImport<JEvents_InventoryStartEventDataClass, JEvents_InventoryStartEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_InventoryStopEventData.pas
+  JEvents_InventoryStopEventDataClass = interface(JObjectClass)
+    ['{5D1EACA5-B321-4BEF-A186-5099C1CE6E29}']
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_InventoryStopEventData')]
+  JEvents_InventoryStopEventData = interface(JObject)
+    ['{DECE0FE2-0CA4-4210-AD0D-F801044CC631}']
+  end;
+
+  TJEvents_InventoryStopEventData = class(TJavaGenericImport<JEvents_InventoryStopEventDataClass, JEvents_InventoryStopEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_AccessStartEventData.pas
+  JEvents_AccessStartEventDataClass = interface(JObjectClass)
+    ['{0FB2B7E8-5266-4C60-93D1-0E29E92B801B}']
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_AccessStartEventData')]
+  JEvents_AccessStartEventData = interface(JObject)
+    ['{61C62570-FE8D-4944-A96E-B01DE0393953}']
+  end;
+
+  TJEvents_AccessStartEventData = class(TJavaGenericImport<JEvents_AccessStartEventDataClass, JEvents_AccessStartEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_AccessStopEventData.pas
+  JEvents_AccessStopEventDataClass = interface(JObjectClass)
+    ['{C8D0F1EE-6C09-42B1-AC32-6EF7902B081C}']
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_AccessStopEventData')]
+  JEvents_AccessStopEventData = interface(JObject)
+    ['{8914F6DC-BAD2-4118-9B20-25DB6E8FD977}']
+  end;
+
+  TJEvents_AccessStopEventData = class(TJavaGenericImport<JEvents_AccessStopEventDataClass, JEvents_AccessStopEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_DisconnectionEventData.pas
+  JEvents_DisconnectionEventDataClass = interface(JObjectClass)
+    ['{1BEA40CB-7068-457B-9608-6A64DE6892A7}']
+    function getDisconnectionEvent : JDISCONNECTION_EVENT_TYPE; cdecl;          // ()Lcom/zebra/rfid/api3/DISCONNECTION_EVENT_TYPE; A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_DisconnectionEventData')]
+  JEvents_DisconnectionEventData = interface(JObject)
+    ['{EC09B256-5DDB-4538-9F08-688BC84E8794}']
+    function getDisconnectionEvent : JDISCONNECTION_EVENT_TYPE; cdecl;          // ()Lcom/zebra/rfid/api3/DISCONNECTION_EVENT_TYPE; A: $1
+  end;
+
+  TJEvents_DisconnectionEventData = class(TJavaGenericImport<JEvents_DisconnectionEventDataClass, JEvents_DisconnectionEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_ReaderExceptionEventData.pas
+  JEvents_ReaderExceptionEventDataClass = interface(JObjectClass)
+    ['{50BAFE52-7315-40FC-845F-2FBCA86A061D}']
+    function getReaderExceptionEventInfo : JString; cdecl;                      // ()Ljava/lang/String; A: $1
+    function getReaderExceptionEventType : JREADER_EXCEPTION_EVENT_TYPE; cdecl; // ()Lcom/zebra/rfid/api3/READER_EXCEPTION_EVENT_TYPE; A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_ReaderExceptionEventData')]
+  JEvents_ReaderExceptionEventData = interface(JObject)
+    ['{A3930B28-F60F-43ED-968A-337378842F5A}']
+    function getReaderExceptionEventInfo : JString; cdecl;                      // ()Ljava/lang/String; A: $1
+    function getReaderExceptionEventType : JREADER_EXCEPTION_EVENT_TYPE; cdecl; // ()Lcom/zebra/rfid/api3/READER_EXCEPTION_EVENT_TYPE; A: $1
+  end;
+
+  TJEvents_ReaderExceptionEventData = class(TJavaGenericImport<JEvents_ReaderExceptionEventDataClass, JEvents_ReaderExceptionEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_NXPEASAlarmEventData.pas
+  JEvents_NXPEASAlarmEventDataClass = interface(JObjectClass)
+    ['{0170018A-4AAE-480E-A58B-70396E9E71A5}']
+    function getEASAlarmCode : JString; cdecl;                                  // ()Ljava/lang/String; A: $1
+    function getantennaID : SmallInt; cdecl;                                    // ()S A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_NXPEASAlarmEventData')]
+  JEvents_NXPEASAlarmEventData = interface(JObject)
+    ['{1F7F931F-D6BF-4517-9C62-AF8D367AF7DF}']
+    function getEASAlarmCode : JString; cdecl;                                  // ()Ljava/lang/String; A: $1
+    function getantennaID : SmallInt; cdecl;                                    // ()S A: $1
+  end;
+
+  TJEvents_NXPEASAlarmEventData = class(TJavaGenericImport<JEvents_NXPEASAlarmEventDataClass, JEvents_NXPEASAlarmEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_HandheldTriggerEventData.pas
+  JEvents_HandheldTriggerEventDataClass = interface(JObjectClass)
+    ['{74DAFAE8-EBD8-49B8-8C3D-660887E6C803}']
+    function getHandheldEvent : JHANDHELD_TRIGGER_EVENT_TYPE; cdecl;            // ()Lcom/zebra/rfid/api3/HANDHELD_TRIGGER_EVENT_TYPE; A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_HandheldTriggerEventData')]
+  JEvents_HandheldTriggerEventData = interface(JObject)
+    ['{81D52EA8-CD72-48A6-9527-43F11F1A97CB}']
+    function getHandheldEvent : JHANDHELD_TRIGGER_EVENT_TYPE; cdecl;            // ()Lcom/zebra/rfid/api3/HANDHELD_TRIGGER_EVENT_TYPE; A: $1
+  end;
+
+  TJEvents_HandheldTriggerEventData = class(TJavaGenericImport<JEvents_HandheldTriggerEventDataClass, JEvents_HandheldTriggerEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_TemperatureAlarmData.pas
+  JEvents_TemperatureAlarmDataClass = interface(JObjectClass)
+    ['{ECAC1622-DD41-49AD-9045-150F5EAE8031}']
+    function getAlarmLevel : JALARM_LEVEL; cdecl;                               // ()Lcom/zebra/rfid/api3/ALARM_LEVEL; A: $1
+    function getAmbientTemp : Integer; cdecl;                                   // ()I A: $1
+    function getCause : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    function getCurrentTemperature : Integer; cdecl;                            // ()I A: $1
+    function getPATemp : Integer; cdecl;                                        // ()I A: $1
+    function getTemperatureSource : JTEMPERATURE_SOURCE; cdecl;                 // ()Lcom/zebra/rfid/api3/TEMPERATURE_SOURCE; A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_TemperatureAlarmData')]
+  JEvents_TemperatureAlarmData = interface(JObject)
+    ['{0F02938F-49A2-4D0C-8C9F-A76D97FF6836}']
+    function getAlarmLevel : JALARM_LEVEL; cdecl;                               // ()Lcom/zebra/rfid/api3/ALARM_LEVEL; A: $1
+    function getAmbientTemp : Integer; cdecl;                                   // ()I A: $1
+    function getCause : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    function getCurrentTemperature : Integer; cdecl;                            // ()I A: $1
+    function getPATemp : Integer; cdecl;                                        // ()I A: $1
+    function getTemperatureSource : JTEMPERATURE_SOURCE; cdecl;                 // ()Lcom/zebra/rfid/api3/TEMPERATURE_SOURCE; A: $1
+  end;
+
+  TJEvents_TemperatureAlarmData = class(TJavaGenericImport<JEvents_TemperatureAlarmDataClass, JEvents_TemperatureAlarmData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_OperationEndSummaryData.pas
+  JEvents_OperationEndSummaryDataClass = interface(JObjectClass)
+    ['{4432D0FB-D1F7-47C1-A3EF-B8F3F76AD171}']
+    function getTotalRounds : Integer; cdecl;                                   // ()I A: $1
+    function getTotalTags : Integer; cdecl;                                     // ()I A: $1
+    function getTotalTimeuS : Int64; cdecl;                                     // ()J A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_OperationEndSummaryData')]
+  JEvents_OperationEndSummaryData = interface(JObject)
+    ['{534CB6B9-DE1B-41D1-BD7D-7F74F392D640}']
+    function getTotalRounds : Integer; cdecl;                                   // ()I A: $1
+    function getTotalTags : Integer; cdecl;                                     // ()I A: $1
+    function getTotalTimeuS : Int64; cdecl;                                     // ()J A: $1
+  end;
+
+  TJEvents_OperationEndSummaryData = class(TJavaGenericImport<JEvents_OperationEndSummaryDataClass, JEvents_OperationEndSummaryData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_BatchModeEventData.pas
+  JEvents_BatchModeEventDataClass = interface(JObjectClass)
+    ['{4394738B-9A5D-48F0-9681-7359971F6C9F}']
+    function get_BatchMode : JBATCH_MODE; cdecl;                                // ()Lcom/zebra/rfid/api3/BATCH_MODE; A: $1
+    function get_RepeatTrigger : JBoolean; cdecl;                               // ()Ljava/lang/Boolean; A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_BatchModeEventData')]
+  JEvents_BatchModeEventData = interface(JObject)
+    ['{F5794E7E-74EB-49BD-87EF-FF1617F5F77D}']
+    function get_BatchMode : JBATCH_MODE; cdecl;                                // ()Lcom/zebra/rfid/api3/BATCH_MODE; A: $1
+    function get_RepeatTrigger : JBoolean; cdecl;                               // ()Ljava/lang/Boolean; A: $1
+  end;
+
+  TJEvents_BatchModeEventData = class(TJavaGenericImport<JEvents_BatchModeEventDataClass, JEvents_BatchModeEventData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_PowerData.pas
+  JEvents_PowerDataClass = interface(JObjectClass)
+    ['{E27DD813-6834-4CB0-A8FF-5BDCC9AC36A6}']
+    function getCause : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    function getCurrent : Single; cdecl;                                        // ()F A: $1
+    function getPower : Single; cdecl;                                          // ()F A: $1
+    function getVoltage : Single; cdecl;                                        // ()F A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_PowerData')]
+  JEvents_PowerData = interface(JObject)
+    ['{9D96DDF4-6293-4F5A-9667-7C382FA73B02}']
+    function getCause : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    function getCurrent : Single; cdecl;                                        // ()F A: $1
+    function getPower : Single; cdecl;                                          // ()F A: $1
+    function getVoltage : Single; cdecl;                                        // ()F A: $1
+  end;
+
+  TJEvents_PowerData = class(TJavaGenericImport<JEvents_PowerDataClass, JEvents_PowerData>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.Events_BatteryData.pas
+  JEvents_BatteryDataClass = interface(JObjectClass)
+    ['{FDDB1747-4336-4834-A5D9-B1B980ACB946}']
+    function getCause : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    function getCharging : boolean; cdecl;                                      // ()Z A: $1
+    function getLevel : Integer; cdecl;                                         // ()I A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/Events_BatteryData')]
+  JEvents_BatteryData = interface(JObject)
+    ['{4E800776-AA6F-47A1-BB11-48889582B518}']
+    function getCause : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    function getCharging : boolean; cdecl;                                      // ()Z A: $1
+    function getLevel : Integer; cdecl;                                         // ()I A: $1
+  end;
+
+  TJEvents_BatteryData = class(TJavaGenericImport<JEvents_BatteryDataClass, JEvents_BatteryData>)
   end;
 
 

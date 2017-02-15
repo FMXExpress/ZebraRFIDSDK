@@ -12,19 +12,30 @@ uses
   com.zebra.rfid.api3.TagData,
   com.zebra.rfid.api3.AntennaInfo,
   com.zebra.rfid.api3.AccessFilter,
-  com.zebra.rfid.api3.TagAccess_Sequence,
-  com.zebra.rfid.api3.NXP,
   com.zebra.rfid.api3.cl,
-  com.zebra.rfid.api3.TagAccess_ReadAccessParams,
-  com.zebra.rfid.api3.TagAccess_WriteAccessParams,
-  com.zebra.rfid.api3.TagAccess_KillAccessParams,
-  com.zebra.rfid.api3.TagAccess_LockAccessParams,
-  com.zebra.rfid.api3.TagAccess_BlockEraseAccessParams,
-  com.zebra.rfid.api3.TagAccess_BlockPermalockAccessParams,
-  com.zebra.rfid.api3.TagAccess_WriteSpecificFieldAccessParams,
-  com.zebra.rfid.api3.TagAccess_RecommisionAccessParams;
+  com.zebra.rfid.api3.TriggerInfo,
+  com.zebra.rfid.api3.ACCESS_OPERATION_CODE,
+  com.zebra.rfid.api3.MEMORY_BANK,
+  com.zebra.rfid.api3.LOCK_PRIVILEGE,
+  com.zebra.rfid.api3.LOCK_DATA_FIELD,
+  com.zebra.rfid.api3.RECOMMISSION_OPERATION_CODE;
 
 type
+  JTagAccess_RecommisionAccessParams = interface; // merged
+  JTagAccess_WriteSpecificFieldAccessParams = interface; // merged
+  JTagAccess_BlockPermalockAccessParams = interface; // merged
+  JTagAccess_BlockEraseAccessParams = interface; // merged
+  JTagAccess_LockAccessParams = interface; // merged
+  JTagAccess_KillAccessParams = interface; // merged
+  JTagAccess_WriteAccessParams = interface; // merged
+  JTagAccess_ReadAccessParams = interface; // merged
+  JNXP_ChangeConfigParams = interface; // merged
+  JNXP_ResetReadProtectParams = interface; // merged
+  JNXP_ReadProtectParams = interface; // merged
+  JNXP_SetEASParams = interface; // merged
+  JNXP = interface; // merged
+  JTagAccess_Sequence_Operation = interface; // merged
+  JTagAccess_Sequence = interface; // merged
   JImpinj_QTWriteAccessParams = interface; // merged
   JImpinj_QTReadAccessParams = interface; // merged
   JTagAccess = interface; // merged
@@ -178,6 +189,522 @@ type
 
   TJImpinj_QTWriteAccessParams = class(TJavaGenericImport<JImpinj_QTWriteAccessParamsClass, JImpinj_QTWriteAccessParams>)
   end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_Sequence.pas
+  JTagAccess_SequenceClass = interface(JObjectClass)
+    ['{2C84C9EF-EE52-4EB3-B3D4-DCF4DF2802B0}']
+    function getLength : Integer; cdecl;                                        // ()I A: $1
+    function getOperation(&index : Integer) : JObject; cdecl;                   // (I)Ljava/lang/Object; A: $1
+    function init(tagAccess : JTagAccess) : JTagAccess_Sequence; cdecl;         // (Lcom/zebra/rfid/api3/TagAccess;Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    procedure add(operation : JTagAccess_Sequence_Operation) ; cdecl;           // (Lcom/zebra/rfid/api3/TagAccess$Sequence$Operation;)V A: $1
+    procedure delete(operation : JTagAccess_Sequence_Operation) ; cdecl;        // (Lcom/zebra/rfid/api3/TagAccess$Sequence$Operation;)V A: $1
+    procedure deleteAll ; cdecl;                                                // ()V A: $1
+    procedure performSequence ; cdecl; overload;                                // ()V A: $1
+    procedure performSequence(accessFilterInfo : JAccessFilter; triggerInfo : JTriggerInfo; antennaInfo : JAntennaInfo) ; cdecl; overload;// (Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/TriggerInfo;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure stopSequence ; cdecl;                                             // ()V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess$Sequence$Operation')]
+  JTagAccess_Sequence = interface(JObject)
+    ['{2E05DD17-6F0D-4C9E-B1E5-C7B0CD07050A}']
+    function getLength : Integer; cdecl;                                        // ()I A: $1
+    function getOperation(&index : Integer) : JObject; cdecl;                   // (I)Ljava/lang/Object; A: $1
+    procedure add(operation : JTagAccess_Sequence_Operation) ; cdecl;           // (Lcom/zebra/rfid/api3/TagAccess$Sequence$Operation;)V A: $1
+    procedure delete(operation : JTagAccess_Sequence_Operation) ; cdecl;        // (Lcom/zebra/rfid/api3/TagAccess$Sequence$Operation;)V A: $1
+    procedure deleteAll ; cdecl;                                                // ()V A: $1
+    procedure performSequence ; cdecl; overload;                                // ()V A: $1
+    procedure performSequence(accessFilterInfo : JAccessFilter; triggerInfo : JTriggerInfo; antennaInfo : JAntennaInfo) ; cdecl; overload;// (Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/TriggerInfo;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure stopSequence ; cdecl;                                             // ()V A: $1
+  end;
+
+  TJTagAccess_Sequence = class(TJavaGenericImport<JTagAccess_SequenceClass, JTagAccess_Sequence>)
+  end;
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_Sequence_Operation.pas
+  JTagAccess_Sequence_OperationClass = interface(JObjectClass)
+    ['{6CAE72C8-AD6D-42CC-ACE6-6498FE6E0C46}']
+    function _GetBlockEraseAccessParams : JTagAccess_BlockEraseAccessParams; cdecl;//  A: $1
+    function _GetBlockPermaLockAccessParams : JTagAccess_BlockPermalockAccessParams; cdecl;//  A: $1
+    function _GetBlockWriteAccessParams : JTagAccess_WriteAccessParams; cdecl;  //  A: $1
+    function _GetChangeConfigParams : JNXP_ChangeConfigParams; cdecl;           //  A: $1
+    function _GetKillAccessParams : JTagAccess_KillAccessParams; cdecl;         //  A: $1
+    function _GetLockAccessParams : JTagAccess_LockAccessParams; cdecl;         //  A: $1
+    function _GetQTReadAccessParams : JImpinj_QTReadAccessParams; cdecl;        //  A: $1
+    function _GetQTWriteAccessParams : JImpinj_QTWriteAccessParams; cdecl;      //  A: $1
+    function _GetReadAccessParams : JTagAccess_ReadAccessParams; cdecl;         //  A: $1
+    function _GetReadProtectParams : JNXP_ReadProtectParams; cdecl;             //  A: $1
+    function _GetRecommisionAccessParams : JTagAccess_RecommisionAccessParams; cdecl;//  A: $1
+    function _GetResetReadProtectParams : JNXP_ResetReadProtectParams; cdecl;   //  A: $1
+    function _GetSetEASParams : JNXP_SetEASParams; cdecl;                       //  A: $1
+    function _GetWriteAccessParams : JTagAccess_WriteAccessParams; cdecl;       //  A: $1
+    function getAccessOperationCode : JACCESS_OPERATION_CODE; cdecl;            // ()Lcom/zebra/rfid/api3/ACCESS_OPERATION_CODE; A: $1
+    function getOperationIndex : Integer; cdecl;                                // ()I A: $1
+    function init(JTagAccess_Sequenceparam0 : JTagAccess_Sequence) : JTagAccess_Sequence_Operation; cdecl;// (Lcom/zebra/rfid/api3/TagAccess$Sequence;)V A: $1
+    procedure _SetBlockEraseAccessParams(Value : JTagAccess_BlockEraseAccessParams) ; cdecl;//  A: $1
+    procedure _SetBlockPermaLockAccessParams(Value : JTagAccess_BlockPermalockAccessParams) ; cdecl;//  A: $1
+    procedure _SetBlockWriteAccessParams(Value : JTagAccess_WriteAccessParams) ; cdecl;//  A: $1
+    procedure _SetChangeConfigParams(Value : JNXP_ChangeConfigParams) ; cdecl;  //  A: $1
+    procedure _SetKillAccessParams(Value : JTagAccess_KillAccessParams) ; cdecl;//  A: $1
+    procedure _SetLockAccessParams(Value : JTagAccess_LockAccessParams) ; cdecl;//  A: $1
+    procedure _SetQTReadAccessParams(Value : JImpinj_QTReadAccessParams) ; cdecl;//  A: $1
+    procedure _SetQTWriteAccessParams(Value : JImpinj_QTWriteAccessParams) ; cdecl;//  A: $1
+    procedure _SetReadAccessParams(Value : JTagAccess_ReadAccessParams) ; cdecl;//  A: $1
+    procedure _SetReadProtectParams(Value : JNXP_ReadProtectParams) ; cdecl;    //  A: $1
+    procedure _SetRecommisionAccessParams(Value : JTagAccess_RecommisionAccessParams) ; cdecl;//  A: $1
+    procedure _SetResetReadProtectParams(Value : JNXP_ResetReadProtectParams) ; cdecl;//  A: $1
+    procedure _SetSetEASParams(Value : JNXP_SetEASParams) ; cdecl;              //  A: $1
+    procedure _SetWriteAccessParams(Value : JTagAccess_WriteAccessParams) ; cdecl;//  A: $1
+    procedure setAccessOperationCode(accessOperationCode : JACCESS_OPERATION_CODE) ; cdecl;// (Lcom/zebra/rfid/api3/ACCESS_OPERATION_CODE;)V A: $1
+    property BlockEraseAccessParams : JTagAccess_BlockEraseAccessParams read _GetBlockEraseAccessParams write _SetBlockEraseAccessParams;// Lcom/zebra/rfid/api3/TagAccess$BlockEraseAccessParams; A: $1
+    property BlockPermaLockAccessParams : JTagAccess_BlockPermalockAccessParams read _GetBlockPermaLockAccessParams write _SetBlockPermaLockAccessParams;// Lcom/zebra/rfid/api3/TagAccess$BlockPermalockAccessParams; A: $1
+    property BlockWriteAccessParams : JTagAccess_WriteAccessParams read _GetBlockWriteAccessParams write _SetBlockWriteAccessParams;// Lcom/zebra/rfid/api3/TagAccess$WriteAccessParams; A: $1
+    property ChangeConfigParams : JNXP_ChangeConfigParams read _GetChangeConfigParams write _SetChangeConfigParams;// Lcom/zebra/rfid/api3/NXP$ChangeConfigParams; A: $1
+    property KillAccessParams : JTagAccess_KillAccessParams read _GetKillAccessParams write _SetKillAccessParams;// Lcom/zebra/rfid/api3/TagAccess$KillAccessParams; A: $1
+    property LockAccessParams : JTagAccess_LockAccessParams read _GetLockAccessParams write _SetLockAccessParams;// Lcom/zebra/rfid/api3/TagAccess$LockAccessParams; A: $1
+    property QTReadAccessParams : JImpinj_QTReadAccessParams read _GetQTReadAccessParams write _SetQTReadAccessParams;// Lcom/zebra/rfid/api3/Impinj$QTReadAccessParams; A: $1
+    property QTWriteAccessParams : JImpinj_QTWriteAccessParams read _GetQTWriteAccessParams write _SetQTWriteAccessParams;// Lcom/zebra/rfid/api3/Impinj$QTWriteAccessParams; A: $1
+    property ReadAccessParams : JTagAccess_ReadAccessParams read _GetReadAccessParams write _SetReadAccessParams;// Lcom/zebra/rfid/api3/TagAccess$ReadAccessParams; A: $1
+    property ReadProtectParams : JNXP_ReadProtectParams read _GetReadProtectParams write _SetReadProtectParams;// Lcom/zebra/rfid/api3/NXP$ReadProtectParams; A: $1
+    property RecommisionAccessParams : JTagAccess_RecommisionAccessParams read _GetRecommisionAccessParams write _SetRecommisionAccessParams;// Lcom/zebra/rfid/api3/TagAccess$RecommisionAccessParams; A: $1
+    property ResetReadProtectParams : JNXP_ResetReadProtectParams read _GetResetReadProtectParams write _SetResetReadProtectParams;// Lcom/zebra/rfid/api3/NXP$ResetReadProtectParams; A: $1
+    property SetEASParams : JNXP_SetEASParams read _GetSetEASParams write _SetSetEASParams;// Lcom/zebra/rfid/api3/NXP$SetEASParams; A: $1
+    property WriteAccessParams : JTagAccess_WriteAccessParams read _GetWriteAccessParams write _SetWriteAccessParams;// Lcom/zebra/rfid/api3/TagAccess$WriteAccessParams; A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_Sequence_Operation')]
+  JTagAccess_Sequence_Operation = interface(JObject)
+    ['{7876413A-4EE4-490E-A6E7-BE6104292372}']
+    function _GetBlockEraseAccessParams : JTagAccess_BlockEraseAccessParams; cdecl;//  A: $1
+    function _GetBlockPermaLockAccessParams : JTagAccess_BlockPermalockAccessParams; cdecl;//  A: $1
+    function _GetBlockWriteAccessParams : JTagAccess_WriteAccessParams; cdecl;  //  A: $1
+    function _GetChangeConfigParams : JNXP_ChangeConfigParams; cdecl;           //  A: $1
+    function _GetKillAccessParams : JTagAccess_KillAccessParams; cdecl;         //  A: $1
+    function _GetLockAccessParams : JTagAccess_LockAccessParams; cdecl;         //  A: $1
+    function _GetQTReadAccessParams : JImpinj_QTReadAccessParams; cdecl;        //  A: $1
+    function _GetQTWriteAccessParams : JImpinj_QTWriteAccessParams; cdecl;      //  A: $1
+    function _GetReadAccessParams : JTagAccess_ReadAccessParams; cdecl;         //  A: $1
+    function _GetReadProtectParams : JNXP_ReadProtectParams; cdecl;             //  A: $1
+    function _GetRecommisionAccessParams : JTagAccess_RecommisionAccessParams; cdecl;//  A: $1
+    function _GetResetReadProtectParams : JNXP_ResetReadProtectParams; cdecl;   //  A: $1
+    function _GetSetEASParams : JNXP_SetEASParams; cdecl;                       //  A: $1
+    function _GetWriteAccessParams : JTagAccess_WriteAccessParams; cdecl;       //  A: $1
+    function getAccessOperationCode : JACCESS_OPERATION_CODE; cdecl;            // ()Lcom/zebra/rfid/api3/ACCESS_OPERATION_CODE; A: $1
+    function getOperationIndex : Integer; cdecl;                                // ()I A: $1
+    procedure _SetBlockEraseAccessParams(Value : JTagAccess_BlockEraseAccessParams) ; cdecl;//  A: $1
+    procedure _SetBlockPermaLockAccessParams(Value : JTagAccess_BlockPermalockAccessParams) ; cdecl;//  A: $1
+    procedure _SetBlockWriteAccessParams(Value : JTagAccess_WriteAccessParams) ; cdecl;//  A: $1
+    procedure _SetChangeConfigParams(Value : JNXP_ChangeConfigParams) ; cdecl;  //  A: $1
+    procedure _SetKillAccessParams(Value : JTagAccess_KillAccessParams) ; cdecl;//  A: $1
+    procedure _SetLockAccessParams(Value : JTagAccess_LockAccessParams) ; cdecl;//  A: $1
+    procedure _SetQTReadAccessParams(Value : JImpinj_QTReadAccessParams) ; cdecl;//  A: $1
+    procedure _SetQTWriteAccessParams(Value : JImpinj_QTWriteAccessParams) ; cdecl;//  A: $1
+    procedure _SetReadAccessParams(Value : JTagAccess_ReadAccessParams) ; cdecl;//  A: $1
+    procedure _SetReadProtectParams(Value : JNXP_ReadProtectParams) ; cdecl;    //  A: $1
+    procedure _SetRecommisionAccessParams(Value : JTagAccess_RecommisionAccessParams) ; cdecl;//  A: $1
+    procedure _SetResetReadProtectParams(Value : JNXP_ResetReadProtectParams) ; cdecl;//  A: $1
+    procedure _SetSetEASParams(Value : JNXP_SetEASParams) ; cdecl;              //  A: $1
+    procedure _SetWriteAccessParams(Value : JTagAccess_WriteAccessParams) ; cdecl;//  A: $1
+    procedure setAccessOperationCode(accessOperationCode : JACCESS_OPERATION_CODE) ; cdecl;// (Lcom/zebra/rfid/api3/ACCESS_OPERATION_CODE;)V A: $1
+    property BlockEraseAccessParams : JTagAccess_BlockEraseAccessParams read _GetBlockEraseAccessParams write _SetBlockEraseAccessParams;// Lcom/zebra/rfid/api3/TagAccess$BlockEraseAccessParams; A: $1
+    property BlockPermaLockAccessParams : JTagAccess_BlockPermalockAccessParams read _GetBlockPermaLockAccessParams write _SetBlockPermaLockAccessParams;// Lcom/zebra/rfid/api3/TagAccess$BlockPermalockAccessParams; A: $1
+    property BlockWriteAccessParams : JTagAccess_WriteAccessParams read _GetBlockWriteAccessParams write _SetBlockWriteAccessParams;// Lcom/zebra/rfid/api3/TagAccess$WriteAccessParams; A: $1
+    property ChangeConfigParams : JNXP_ChangeConfigParams read _GetChangeConfigParams write _SetChangeConfigParams;// Lcom/zebra/rfid/api3/NXP$ChangeConfigParams; A: $1
+    property KillAccessParams : JTagAccess_KillAccessParams read _GetKillAccessParams write _SetKillAccessParams;// Lcom/zebra/rfid/api3/TagAccess$KillAccessParams; A: $1
+    property LockAccessParams : JTagAccess_LockAccessParams read _GetLockAccessParams write _SetLockAccessParams;// Lcom/zebra/rfid/api3/TagAccess$LockAccessParams; A: $1
+    property QTReadAccessParams : JImpinj_QTReadAccessParams read _GetQTReadAccessParams write _SetQTReadAccessParams;// Lcom/zebra/rfid/api3/Impinj$QTReadAccessParams; A: $1
+    property QTWriteAccessParams : JImpinj_QTWriteAccessParams read _GetQTWriteAccessParams write _SetQTWriteAccessParams;// Lcom/zebra/rfid/api3/Impinj$QTWriteAccessParams; A: $1
+    property ReadAccessParams : JTagAccess_ReadAccessParams read _GetReadAccessParams write _SetReadAccessParams;// Lcom/zebra/rfid/api3/TagAccess$ReadAccessParams; A: $1
+    property ReadProtectParams : JNXP_ReadProtectParams read _GetReadProtectParams write _SetReadProtectParams;// Lcom/zebra/rfid/api3/NXP$ReadProtectParams; A: $1
+    property RecommisionAccessParams : JTagAccess_RecommisionAccessParams read _GetRecommisionAccessParams write _SetRecommisionAccessParams;// Lcom/zebra/rfid/api3/TagAccess$RecommisionAccessParams; A: $1
+    property ResetReadProtectParams : JNXP_ResetReadProtectParams read _GetResetReadProtectParams write _SetResetReadProtectParams;// Lcom/zebra/rfid/api3/NXP$ResetReadProtectParams; A: $1
+    property SetEASParams : JNXP_SetEASParams read _GetSetEASParams write _SetSetEASParams;// Lcom/zebra/rfid/api3/NXP$SetEASParams; A: $1
+    property WriteAccessParams : JTagAccess_WriteAccessParams read _GetWriteAccessParams write _SetWriteAccessParams;// Lcom/zebra/rfid/api3/TagAccess$WriteAccessParams; A: $1
+  end;
+
+  TJTagAccess_Sequence_Operation = class(TJavaGenericImport<JTagAccess_Sequence_OperationClass, JTagAccess_Sequence_Operation>)
+  end;
+
+
+
+  // Merged from: .\com.zebra.rfid.api3.NXP.pas
+  JNXPClass = interface(JObjectClass)
+    ['{097496C2-20B7-45B3-BFF7-D8E5CDF3DC96}']
+    function ChangeConfigWait(tagID : JString; changeConfigParams : JNXP_ChangeConfigParams; antennaInfo : JAntennaInfo) : JTagData; cdecl;// (Ljava/lang/String;Lcom/zebra/rfid/api3/NXP$ChangeConfigParams;Lcom/zebra/rfid/api3/AntennaInfo;)Lcom/zebra/rfid/api3/TagData; A: $1
+    function init(tagAccess : JTagAccess) : JNXP; cdecl; overload;              // (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    procedure ChangeConfigEvent(ChangeConfigParams : JNXP_ChangeConfigParams; accessFilter : JAccessFilter; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$ChangeConfigParams;Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure SetEASWait(tagID : JString; setEASParams : JNXP_SetEASParams; antennaInfo : JAntennaInfo) ; cdecl;// (Ljava/lang/String;Lcom/zebra/rfid/api3/NXP$SetEASParams;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure init(nativeLibParams : Jay) ; cdecl; overload;                    // (Lcom/zebra/rfid/api3/ay;)V A: $1
+    procedure performEASScan ; cdecl; overload;                                 // ()V A: $1
+    procedure performEASScan(triggerInfo : JTriggerInfo; antennaInfo : JAntennaInfo) ; cdecl; overload;// (Lcom/zebra/rfid/api3/TriggerInfo;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure readProtectEvent(readProtectParams : JNXP_ReadProtectParams; accessFilter : JAccessFilter; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$ReadProtectParams;Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure readProtectWait(tagID : JString; readProtectParams : JNXP_ReadProtectParams; antennaInfo : JAntennaInfo) ; cdecl;// (Ljava/lang/String;Lcom/zebra/rfid/api3/NXP$ReadProtectParams;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure resetReadProtectEvent(resetReadProtectParams : JNXP_ResetReadProtectParams; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$ResetReadProtectParams;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure setEASEvent(setEASParams : JNXP_SetEASParams; accessFilter : JAccessFilter; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$SetEASParams;Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure stopEASScan ; cdecl;                                              // ()V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/NXP$ChangeConfigParams')]
+  JNXP = interface(JObject)
+    ['{7821AB84-CD1C-49B0-AC52-DD13C075D81F}']
+    function ChangeConfigWait(tagID : JString; changeConfigParams : JNXP_ChangeConfigParams; antennaInfo : JAntennaInfo) : JTagData; cdecl;// (Ljava/lang/String;Lcom/zebra/rfid/api3/NXP$ChangeConfigParams;Lcom/zebra/rfid/api3/AntennaInfo;)Lcom/zebra/rfid/api3/TagData; A: $1
+    procedure ChangeConfigEvent(ChangeConfigParams : JNXP_ChangeConfigParams; accessFilter : JAccessFilter; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$ChangeConfigParams;Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure SetEASWait(tagID : JString; setEASParams : JNXP_SetEASParams; antennaInfo : JAntennaInfo) ; cdecl;// (Ljava/lang/String;Lcom/zebra/rfid/api3/NXP$SetEASParams;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure performEASScan ; cdecl; overload;                                 // ()V A: $1
+    procedure performEASScan(triggerInfo : JTriggerInfo; antennaInfo : JAntennaInfo) ; cdecl; overload;// (Lcom/zebra/rfid/api3/TriggerInfo;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure readProtectEvent(readProtectParams : JNXP_ReadProtectParams; accessFilter : JAccessFilter; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$ReadProtectParams;Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure readProtectWait(tagID : JString; readProtectParams : JNXP_ReadProtectParams; antennaInfo : JAntennaInfo) ; cdecl;// (Ljava/lang/String;Lcom/zebra/rfid/api3/NXP$ReadProtectParams;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure resetReadProtectEvent(resetReadProtectParams : JNXP_ResetReadProtectParams; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$ResetReadProtectParams;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure setEASEvent(setEASParams : JNXP_SetEASParams; accessFilter : JAccessFilter; antennaInfo : JAntennaInfo) ; cdecl;// (Lcom/zebra/rfid/api3/NXP$SetEASParams;Lcom/zebra/rfid/api3/AccessFilter;Lcom/zebra/rfid/api3/AntennaInfo;)V A: $1
+    procedure stopEASScan ; cdecl;                                              // ()V A: $1
+  end;
+
+  TJNXP = class(TJavaGenericImport<JNXPClass, JNXP>)
+  end;
+
+  // Merged from: .\com.zebra.rfid.api3.NXP_SetEASParams.pas
+  JNXP_SetEASParamsClass = interface(JObjectClass)
+    ['{9F9CDCB0-C9B3-4E6F-B0C3-E114EE7DCE9C}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function init(JNXPparam0 : JNXP) : JNXP_SetEASParams; cdecl; overload;      // (Lcom/zebra/rfid/api3/NXP;)V A: $1
+    function init(m_nAccessPassword : Int64; m_bSetEAS : boolean) : JNXP_SetEASParams; cdecl; overload;// (Lcom/zebra/rfid/api3/NXP;JZ)V A: $1
+    function isEASSet : boolean; cdecl;                                         // ()Z A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setEAS(setEAS : boolean) ; cdecl;                                 // (Z)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/NXP_SetEASParams')]
+  JNXP_SetEASParams = interface(JObject)
+    ['{D11903CA-1ABB-49B2-8500-92DF071E7C07}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function isEASSet : boolean; cdecl;                                         // ()Z A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setEAS(setEAS : boolean) ; cdecl;                                 // (Z)V A: $1
+  end;
+
+  TJNXP_SetEASParams = class(TJavaGenericImport<JNXP_SetEASParamsClass, JNXP_SetEASParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.NXP_ReadProtectParams.pas
+  JNXP_ReadProtectParamsClass = interface(JObjectClass)
+    ['{C6F2B1E0-9111-4785-A2C6-8AD772B9336F}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function init(JNXPparam0 : JNXP) : JNXP_ReadProtectParams; cdecl; overload; // (Lcom/zebra/rfid/api3/NXP;)V A: $1
+    function init(m_nAccessPassword : Int64) : JNXP_ReadProtectParams; cdecl; overload;// (Lcom/zebra/rfid/api3/NXP;J)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/NXP_ReadProtectParams')]
+  JNXP_ReadProtectParams = interface(JObject)
+    ['{DF35375D-F097-45E0-8A40-3B6ECD254C4D}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+  end;
+
+  TJNXP_ReadProtectParams = class(TJavaGenericImport<JNXP_ReadProtectParamsClass, JNXP_ReadProtectParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.NXP_ResetReadProtectParams.pas
+  JNXP_ResetReadProtectParamsClass = interface(JObjectClass)
+    ['{B698A44B-94B1-421D-A7B0-668F200DC769}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function init(JNXPparam0 : JNXP) : JNXP_ResetReadProtectParams; cdecl; overload;// (Lcom/zebra/rfid/api3/NXP;)V A: $1
+    function init(m_nAccessPassword : Int64) : JNXP_ResetReadProtectParams; cdecl; overload;// (Lcom/zebra/rfid/api3/NXP;J)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/NXP_ResetReadProtectParams')]
+  JNXP_ResetReadProtectParams = interface(JObject)
+    ['{17E330EB-7B28-49D6-80E9-AEFF097A50F1}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+  end;
+
+  TJNXP_ResetReadProtectParams = class(TJavaGenericImport<JNXP_ResetReadProtectParamsClass, JNXP_ResetReadProtectParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.NXP_ChangeConfigParams.pas
+  JNXP_ChangeConfigParamsClass = interface(JObjectClass)
+    ['{1718F16B-DCD1-44D0-B444-7988B52FE139}']
+    function getAccessword : Int64; cdecl;                                      // ()J A: $1
+    function getNXPChangeConfigWord : SmallInt; cdecl;                          // ()S A: $1
+    function init(JNXPparam0 : JNXP) : JNXP_ChangeConfigParams; cdecl;          // (Lcom/zebra/rfid/api3/NXP;)V A: $1
+    procedure setAccessword(m_nAccessword : Int64) ; cdecl;                     // (J)V A: $1
+    procedure setNXPChangeConfigWord(m_NXPChangeConfigWord : SmallInt) ; cdecl; // (S)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/NXP_ChangeConfigParams')]
+  JNXP_ChangeConfigParams = interface(JObject)
+    ['{72F2E0E3-C00D-4074-AF4D-3E188EB1787B}']
+    function getAccessword : Int64; cdecl;                                      // ()J A: $1
+    function getNXPChangeConfigWord : SmallInt; cdecl;                          // ()S A: $1
+    procedure setAccessword(m_nAccessword : Int64) ; cdecl;                     // (J)V A: $1
+    procedure setNXPChangeConfigWord(m_NXPChangeConfigWord : SmallInt) ; cdecl; // (S)V A: $1
+  end;
+
+  TJNXP_ChangeConfigParams = class(TJavaGenericImport<JNXP_ChangeConfigParamsClass, JNXP_ChangeConfigParams>)
+  end;
+
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_ReadAccessParams.pas
+  JTagAccess_ReadAccessParamsClass = interface(JObjectClass)
+    ['{2F475FAC-160F-44A4-96D2-DD109F74A41B}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteCount : Integer; cdecl;                                     // ()I A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_ReadAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_eMemoryBank : JMEMORY_BANK; m_nByteOffset : Integer; m_nByteCount : Integer; m_nAccessPassword : Int64) : JTagAccess_ReadAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;Lcom/zebra/rfid/api3/MEMORY_BANK;IIJ)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteCount(m_nByteCount : Integer) ; cdecl;                     // (I)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_ReadAccessParams')]
+  JTagAccess_ReadAccessParams = interface(JObject)
+    ['{4958FA7D-3A15-4AF5-88DE-FCDAA3608259}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteCount : Integer; cdecl;                                     // ()I A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteCount(m_nByteCount : Integer) ; cdecl;                     // (I)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+  end;
+
+  TJTagAccess_ReadAccessParams = class(TJavaGenericImport<JTagAccess_ReadAccessParamsClass, JTagAccess_ReadAccessParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_WriteAccessParams.pas
+  JTagAccess_WriteAccessParamsClass = interface(JObjectClass)
+    ['{E4776667-A9D6-492B-B2A8-A524411CC256}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    function getStringWriteData : JString; cdecl;                               // ()Ljava/lang/String; A: $1
+    function getWriteData : TJavaArray<Byte>; cdecl;                            // ()[B A: $1
+    function getWriteDataLength : Integer; cdecl;                               // ()I A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_WriteAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_eMemoryBank : JMEMORY_BANK; m_nByteOffset : Integer; m_nWriteDataLength : Integer; m_nAccessPassword : Int64; m_WriteData : TJavaArray<Byte>) : JTagAccess_WriteAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;Lcom/zebra/rfid/api3/MEMORY_BANK;IIJ[B)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+    procedure setWriteData(writeData : TJavaArray<Byte>) ; cdecl; overload;     // ([B)V A: $1
+    procedure setWriteData(writeDataInStringFormat : JString) ; cdecl; overload;// (Ljava/lang/String;)V A: $1
+    procedure setWriteDataLength(writeDataLength : Integer) ; cdecl;            // (I)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_WriteAccessParams')]
+  JTagAccess_WriteAccessParams = interface(JObject)
+    ['{5CAD001E-9066-4E74-8A9B-42B8445FA7EE}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    function getStringWriteData : JString; cdecl;                               // ()Ljava/lang/String; A: $1
+    function getWriteData : TJavaArray<Byte>; cdecl;                            // ()[B A: $1
+    function getWriteDataLength : Integer; cdecl;                               // ()I A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+    procedure setWriteData(writeData : TJavaArray<Byte>) ; cdecl; overload;     // ([B)V A: $1
+    procedure setWriteData(writeDataInStringFormat : JString) ; cdecl; overload;// (Ljava/lang/String;)V A: $1
+    procedure setWriteDataLength(writeDataLength : Integer) ; cdecl;            // (I)V A: $1
+  end;
+
+  TJTagAccess_WriteAccessParams = class(TJavaGenericImport<JTagAccess_WriteAccessParamsClass, JTagAccess_WriteAccessParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_KillAccessParams.pas
+  JTagAccess_KillAccessParamsClass = interface(JObjectClass)
+    ['{0A5FFAC0-44CC-4BE8-8B4E-3FA511C03CFF}']
+    function getKillPassword : Int64; cdecl;                                    // ()J A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_KillAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_nKillPassword : Int64) : JTagAccess_KillAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;J)V A: $1
+    procedure setKillPassword(killPassword : Int64) ; cdecl;                    // (J)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_KillAccessParams')]
+  JTagAccess_KillAccessParams = interface(JObject)
+    ['{F1A5316A-D2D5-4E70-90D6-7CA2DA6516CB}']
+    function getKillPassword : Int64; cdecl;                                    // ()J A: $1
+    procedure setKillPassword(killPassword : Int64) ; cdecl;                    // (J)V A: $1
+  end;
+
+  TJTagAccess_KillAccessParams = class(TJavaGenericImport<JTagAccess_KillAccessParamsClass, JTagAccess_KillAccessParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_LockAccessParams.pas
+  JTagAccess_LockAccessParamsClass = interface(JObjectClass)
+    ['{76CF0C3E-E2EF-447F-97CE-DDB61AA528F9}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getAccessPasswordMemoryIndex : Integer; cdecl;                     // ()I A: $1
+    function getEPCMemoryIndex : Integer; cdecl;                                // ()I A: $1
+    function getKillPasswordMemoryIndex : Integer; cdecl;                       // ()I A: $1
+    function getLockPrivilege : TJavaArray<JLOCK_PRIVILEGE>; cdecl;             // ()[Lcom/zebra/rfid/api3/LOCK_PRIVILEGE; A: $1
+    function getTIDMemoryIndex : Integer; cdecl;                                // ()I A: $1
+    function getUserMemoryIndex : Integer; cdecl;                               // ()I A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_LockAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_nAccessPassword : Int64; m_eLockPrivilege : TJavaArray<JLOCK_PRIVILEGE>) : JTagAccess_LockAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;J[Lcom/zebra/rfid/api3/LOCK_PRIVILEGE;)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setLockPrivilege(lockDataField : JLOCK_DATA_FIELD; lockPrivilege : JLOCK_PRIVILEGE) ; cdecl;// (Lcom/zebra/rfid/api3/LOCK_DATA_FIELD;Lcom/zebra/rfid/api3/LOCK_PRIVILEGE;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_LockAccessParams')]
+  JTagAccess_LockAccessParams = interface(JObject)
+    ['{91A96665-78AF-4CBB-A9F0-2043BC05F5C7}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getAccessPasswordMemoryIndex : Integer; cdecl;                     // ()I A: $1
+    function getEPCMemoryIndex : Integer; cdecl;                                // ()I A: $1
+    function getKillPasswordMemoryIndex : Integer; cdecl;                       // ()I A: $1
+    function getLockPrivilege : TJavaArray<JLOCK_PRIVILEGE>; cdecl;             // ()[Lcom/zebra/rfid/api3/LOCK_PRIVILEGE; A: $1
+    function getTIDMemoryIndex : Integer; cdecl;                                // ()I A: $1
+    function getUserMemoryIndex : Integer; cdecl;                               // ()I A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setLockPrivilege(lockDataField : JLOCK_DATA_FIELD; lockPrivilege : JLOCK_PRIVILEGE) ; cdecl;// (Lcom/zebra/rfid/api3/LOCK_DATA_FIELD;Lcom/zebra/rfid/api3/LOCK_PRIVILEGE;)V A: $1
+  end;
+
+  TJTagAccess_LockAccessParams = class(TJavaGenericImport<JTagAccess_LockAccessParamsClass, JTagAccess_LockAccessParams>)
+  end;
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_BlockEraseAccessParams.pas
+  JTagAccess_BlockEraseAccessParamsClass = interface(JObjectClass)
+    ['{80C5F8E2-7669-416F-AEF0-3020022D5EB2}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteCount : Integer; cdecl;                                     // ()I A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_BlockEraseAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_eMemoryBank : JMEMORY_BANK; m_nByteOffset : Integer; m_nByteCount : Integer; m_nAccessPassword : Int64) : JTagAccess_BlockEraseAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;Lcom/zebra/rfid/api3/MEMORY_BANK;IIJ)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteCount(byteCount : Integer) ; cdecl;                        // (I)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_BlockEraseAccessParams')]
+  JTagAccess_BlockEraseAccessParams = interface(JObject)
+    ['{9320CCBC-8D53-4F28-91B2-2521ACDC559E}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteCount : Integer; cdecl;                                     // ()I A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteCount(byteCount : Integer) ; cdecl;                        // (I)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+  end;
+
+  TJTagAccess_BlockEraseAccessParams = class(TJavaGenericImport<JTagAccess_BlockEraseAccessParamsClass, JTagAccess_BlockEraseAccessParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_BlockPermalockAccessParams.pas
+  JTagAccess_BlockPermalockAccessParamsClass = interface(JObjectClass)
+    ['{491BADB2-59DA-43F6-9ADD-D7B8459E04C2}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteCount : Integer; cdecl;                                     // ()I A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMask : TJavaArray<Byte>; cdecl;                                 // ()[B A: $1
+    function getMaskLength : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    function getReadLock : boolean; cdecl;                                      // ()Z A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_BlockPermalockAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_eMemoryBank : JMEMORY_BANK; m_bReadLock : boolean; m_nByteOffset : Integer; m_nByteCount : Integer; m_nAccessPassword : Int64; m_nMaskLength : Integer; m_pMask : TJavaArray<Byte>) : JTagAccess_BlockPermalockAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;Lcom/zebra/rfid/api3/MEMORY_BANK;ZIIJI[B)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteCount(byteCount : Integer) ; cdecl;                        // (I)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMask(mask : TJavaArray<Byte>) ; cdecl;                         // ([B)V A: $1
+    procedure setMaskLength(maskLength : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+    procedure setReadLock(readLock : boolean) ; cdecl;                          // (Z)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_BlockPermalockAccessParams')]
+  JTagAccess_BlockPermalockAccessParams = interface(JObject)
+    ['{D2FE1336-C452-48EA-BB39-858837238EC9}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getByteCount : Integer; cdecl;                                     // ()I A: $1
+    function getByteOffset : Integer; cdecl;                                    // ()I A: $1
+    function getMask : TJavaArray<Byte>; cdecl;                                 // ()[B A: $1
+    function getMaskLength : Integer; cdecl;                                    // ()I A: $1
+    function getMemoryBank : JMEMORY_BANK; cdecl;                               // ()Lcom/zebra/rfid/api3/MEMORY_BANK; A: $1
+    function getReadLock : boolean; cdecl;                                      // ()Z A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setByteCount(byteCount : Integer) ; cdecl;                        // (I)V A: $1
+    procedure setByteOffset(byteOffset : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMask(mask : TJavaArray<Byte>) ; cdecl;                         // ([B)V A: $1
+    procedure setMaskLength(maskLength : Integer) ; cdecl;                      // (I)V A: $1
+    procedure setMemoryBank(memoryBank : JMEMORY_BANK) ; cdecl;                 // (Lcom/zebra/rfid/api3/MEMORY_BANK;)V A: $1
+    procedure setReadLock(readLock : boolean) ; cdecl;                          // (Z)V A: $1
+  end;
+
+  TJTagAccess_BlockPermalockAccessParams = class(TJavaGenericImport<JTagAccess_BlockPermalockAccessParamsClass, JTagAccess_BlockPermalockAccessParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_WriteSpecificFieldAccessParams.pas
+  JTagAccess_WriteSpecificFieldAccessParamsClass = interface(JObjectClass)
+    ['{D2DE968F-8316-4992-8EBA-ED1ED636F67C}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getWriteData : TJavaArray<Byte>; cdecl;                            // ()[B A: $1
+    function getWriteDataLength : Integer; cdecl;                               // ()I A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_WriteSpecificFieldAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_WriteData : TJavaArray<Byte>; m_nWriteDataLength : Integer; m_nAccessPassword : Int64) : JTagAccess_WriteSpecificFieldAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;[BIJ)V A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setWriteData(writeData : TJavaArray<Byte>) ; cdecl;               // ([B)V A: $1
+    procedure setWriteDataLength(writeDataLength : Integer) ; cdecl;            // (I)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_WriteSpecificFieldAccessParams')]
+  JTagAccess_WriteSpecificFieldAccessParams = interface(JObject)
+    ['{DC030FD9-AC04-4F57-9834-5CDC630DE0A1}']
+    function getAccessPassword : Int64; cdecl;                                  // ()J A: $1
+    function getWriteData : TJavaArray<Byte>; cdecl;                            // ()[B A: $1
+    function getWriteDataLength : Integer; cdecl;                               // ()I A: $1
+    procedure setAccessPassword(accessPassword : Int64) ; cdecl;                // (J)V A: $1
+    procedure setWriteData(writeData : TJavaArray<Byte>) ; cdecl;               // ([B)V A: $1
+    procedure setWriteDataLength(writeDataLength : Integer) ; cdecl;            // (I)V A: $1
+  end;
+
+  TJTagAccess_WriteSpecificFieldAccessParams = class(TJavaGenericImport<JTagAccess_WriteSpecificFieldAccessParamsClass, JTagAccess_WriteSpecificFieldAccessParams>)
+  end;
+
+
+  // Merged from: .\com.zebra.rfid.api3.TagAccess_RecommisionAccessParams.pas
+  JTagAccess_RecommisionAccessParamsClass = interface(JObjectClass)
+    ['{B9409642-3B19-4A33-9CAE-021608B48C24}']
+    function getKillPassword : Int64; cdecl;                                    // ()J A: $1
+    function getOpCode : JRECOMMISSION_OPERATION_CODE; cdecl;                   // ()Lcom/zebra/rfid/api3/RECOMMISSION_OPERATION_CODE; A: $1
+    function init(JTagAccessparam0 : JTagAccess) : JTagAccess_RecommisionAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;)V A: $1
+    function init(m_nKillPassword : Int64; m_eOpCode : JRECOMMISSION_OPERATION_CODE) : JTagAccess_RecommisionAccessParams; cdecl; overload;// (Lcom/zebra/rfid/api3/TagAccess;JLcom/zebra/rfid/api3/RECOMMISSION_OPERATION_CODE;)V A: $1
+    procedure setKillPassword(killPassword : Int64) ; cdecl;                    // (J)V A: $1
+    procedure setOpCode(opCode : JRECOMMISSION_OPERATION_CODE) ; cdecl;         // (Lcom/zebra/rfid/api3/RECOMMISSION_OPERATION_CODE;)V A: $1
+  end;
+
+  [JavaSignature('com/zebra/rfid/api3/TagAccess_RecommisionAccessParams')]
+  JTagAccess_RecommisionAccessParams = interface(JObject)
+    ['{08E7F0EA-4A37-4F72-8D4B-987313F98468}']
+    function getKillPassword : Int64; cdecl;                                    // ()J A: $1
+    function getOpCode : JRECOMMISSION_OPERATION_CODE; cdecl;                   // ()Lcom/zebra/rfid/api3/RECOMMISSION_OPERATION_CODE; A: $1
+    procedure setKillPassword(killPassword : Int64) ; cdecl;                    // (J)V A: $1
+    procedure setOpCode(opCode : JRECOMMISSION_OPERATION_CODE) ; cdecl;         // (Lcom/zebra/rfid/api3/RECOMMISSION_OPERATION_CODE;)V A: $1
+  end;
+
+  TJTagAccess_RecommisionAccessParams = class(TJavaGenericImport<JTagAccess_RecommisionAccessParamsClass, JTagAccess_RecommisionAccessParams>)
+  end;
+
+
+const
+  TJTagAccess_LockAccessParamsb = 5;
 
 
 implementation

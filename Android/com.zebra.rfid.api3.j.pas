@@ -27,7 +27,7 @@ uses
   com.zebra.rfid.api3.AccessFilter,
   com.zebra.rfid.api3.cl,
   com.zebra.rfid.api3.ae,
-  com.zebra.rfid.api3.TagAccess_Sequence,
+  com.zebra.rfid.api3.Impinj,
   com.zebra.rfid.api3.RegulatoryConfig,
   com.zebra.rfid.api3.RegionInfo,
   com.zebra.rfid.api3.Antennas,
